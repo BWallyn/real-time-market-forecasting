@@ -7,7 +7,14 @@ requires-python = ">=3.9"
 name = "real_time_market_forecasting"
 readme = "README.md"
 dynamic = [ "version",]
-dependencies = [ "ipython>=8.10", "jupyterlab>=3.0", "notebook", "kedro~=1.0.0",]
+dependencies = [
+ "ipython>=8.10",
+ "jupyterlab>=3.0",
+ "notebook",
+ "kedro~=1.0.0",
+ "kedro-viz>=12.1.0",
+ "pyarrow>=21.0.0",
+]
 
 [project.scripts]
 real-time-market-forecasting = "real_time_market_forecasting.__main__:main"
@@ -41,8 +48,38 @@ exclude_lines = [ "pragma: no cover", "raise NotImplementedError",]
 docstring-code-format = true
 
 [tool.ruff.lint]
-select = [ "F", "W", "E", "I", "UP", "PL", "T201",]
-ignore = [ "E501",]
+lint.select = [
+    "B",    # Bugbear
+    "C4",   # Comprehensions
+    "C90",  # mccabe
+    "D",    # Docstrings
+    "E",    # pycodestyle error
+    "W",    # pycodestyle warning
+    "F",    # flake8
+    "S",    # bandit
+    "N",    # pep8-naming
+    "RUF",  # ruff
+    "I",    # isort
+    "PD",   # pandas
+    "UP",   # pyupgrade
+    "PL",   # pylint
+    "T201", # print
+]
+lint.ignore = [
+    "E501", # line too long
+    "D100", # missing docstring
+    "D104", # missing docstring in public package
+    "D203", # One blank line before class docstring
+    "D205", # blank line between summary and description
+    "D212", # Multi-line docstring summary should start at the second line
+    "D400", # first line should end with a period, question mark or exclamation point
+    "D404", # first word of the docstring should not be "This"
+    "D407", # Missing dashed underline after section
+    "D413", # Missing blank line after section
+    "D415", # first line should end with a period, question mark or exclamation point
+    "N806", # Variable should be lowercase
+    "PD901",# Avoid using "df" as a variable name
+]
 
 [tool.setuptools.dynamic.version]
 attr = "real_time_market_forecasting.__version__"
@@ -50,3 +87,6 @@ attr = "real_time_market_forecasting.__version__"
 [tool.setuptools.packages.find]
 where = [ "src",]
 namespaces = false
+
+[tool.kedro_telemetry]
+project_id = "db57f0cc06a648f3bb6f5b7b77af1465"
